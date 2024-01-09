@@ -1,50 +1,59 @@
 ---
 author: Sat Naing
 pubDatetime: 2022-12-28T04:59:04.866Z
-title: Dynamic OG image generation in AstroPaper blog posts
+title: Generación dinámica de imágenes OG en las entradas de blog de AstroPaper
 slug: dynamic-og-image-generation-in-astropaper-blog-posts
 featured: false
 draft: false
 tags:
   - docs
   - release
-description: New feature in AstroPaper v1.4.0, introducing dynamic OG image generation for blog posts.
+description: Nueva función en AstroPaper v1.4.0, que introduce la generación dinámica de imágenes OG para las entradas del blog.
 ---
 
-New feature in AstroPaper v1.4.0, introducing dynamic OG image generation for blog posts.
+Nueva función en AstroPaper v1.4.0, que introduce la generación dinámica de imágenes OG para las entradas del blog.
 
-## Table of contents
 
-## Intro
+## Índice
 
-OG images (aka Social Images) play an important role in social media engagements. In case you don't know what OG image means, it is an image displayed whenever we share our website URL on social media such as Facebook, Discord etc.
+## Introducción
 
-> The Social Image used for Twitter is technically not called OG image. However, in this post, I'll be using the term OG image for all types of Social Images.
+Las imágenes OG (también conocidas como imágenes sociales) desempeñan un papel importante en la participación en las redes sociales. En caso de que no sepas lo que significa imagen OG, es una imagen que se muestra cada vez que compartimos la URL de nuestro sitio web en medios sociales como Facebook, Discord, etc.
 
-## Default/Static OG image (the old way)
+> La Imagen Social utilizada para Twitter técnicamente no se llama imagen OG. Sin embargo, en este post, voy a utilizar el término imagen OG para todos los tipos de Imágenes Sociales.
 
-AstroPaper already provided a way to add an OG image to a blog post. The author can specify the OG image in the frontmatter `ogImage`. Even when the author doesn't define the OG image in the frontmatter, the default OG image will be used as a fallback (in this case `public/astropaper-og.jpg`). But the problem is that the default OG image is static, which means every blog post that does not include an OG image in the frontmatter will always use the same default OG image despite each post title/content being different from others.
 
-## Dynamic OG Image
+## Default/Static OG image (la vieja forma)
 
-Generating a dynamic OG image for each post allows the author to avoid specifying an OG image for every single blog post. Besides, this will prevent the fallback OG image from being identical to all blog posts.
+AstroPaper ya proporciona una forma de añadir una imagen OG a una entrada de blog. El autor puede especificar la imagen OG en el frontmatter `ogImage`. Incluso cuando el autor no define la imagen OG en el frontmatter, la imagen OG por defecto se utilizará como un fallback (en este caso `public/astropaper-og.jpg`). Pero el problema es que la imagen OG por defecto es estática, lo que significa que cada entrada del blog que no incluya una imagen OG en el frontmatter utilizará siempre la misma imagen OG por defecto a pesar de que el título/contenido de cada entrada sea diferente de los demás.
 
-In AstroPaper v1.4.0, Vercel's [Satori](https://github.com/vercel/satori) package is used for dynamic OG image generation.
+## Imagen OG dinámica
 
-Dynamic OG images will be generated at build time for blog posts that
+Generar una imagen OG dinámica para cada entrada permite al autor evitar especificar una imagen OG para cada entrada del blog. Además, esto evitará que la imagen OG fallback sea idéntica para todas las entradas del blog.
 
-- don't include OG image in the frontmatter
-- are not marked as draft.
+En AstroPaper v1.4.0, se utiliza el paquete [Satori](https://github.com/vercel/satori) de Vercel para la generación de imágenes OG dinámicas.
 
-## Anatomy of AstroPaper dynamic OG image
 
-Dynamic OG image of AstroPaper includes _the blog post title_, _author name_ and _site title_. Author name and site title will be retrieved via `SITE.author` and `SITE.title` of **"src/config.ts"** file. The title is generated from the blog post frontmatter `title`.  
+Las imágenes OG dinámicas se generarán en tiempo de compilación para las entradas de blog que
+
+
+- no incluyan una imagen OG en el frontmatter
+- no estén marcados como borrador.
+
+
+
+## Anatomía de la imagen OG dinámica de AstroPaper
+
+La imagen OG dinámica de AstroPaper incluye _the blog post title_, _author name_ y _site title_. El nombre del autor y el título del sitio se obtendrán a través de `SITE.author` y `SITE.title` del archivo **"src/config.ts "**. El título se genera a partir del `title` de la entrada del blog.  
 ![Example Dynamic OG Image link](https://user-images.githubusercontent.com/53733092/209704501-e9c2236a-3f4d-4c67-bab3-025aebd63382.png)
 
-## Limitations
 
-At the time of writing this, [Satori](https://github.com/vercel/satori) is fairly new and has not reached major release yet. So, there are still some limitations to this dynamic OG image feature.
 
-- If you have Blog posts with non-English titles, you have to set `embedFonts` option to `false` (file: `src/utils/generateOgImage.tsx`). Even after this, the OG image might not be displayed very well.
-- Besides, RTL languages are not supported yet.
-- [Using emoji](https://github.com/vercel/satori#emojis) in the title might be a little bit tricky.
+## Limitaciones
+
+En el momento de escribir esto, [Satori](https://github.com/vercel/satori) es bastante nuevo y aún no ha alcanzado la versión principal. Por lo tanto, todavía hay algunas limitaciones a esta característica dinámica de imagen OG.
+
+
+- Si tienes entradas de blog con títulos que no están en inglés, tienes que configurar la opción `embedFonts` a `false` (archivo: `src/utils/generateOgImage.tsx`). Incluso después de esto, la imagen OG podría no mostrarse muy bien.
+- Además, los idiomas RTL aún no están soportados.
+-[Usar emoji](https://github.com/vercel/satori#emojis) en el título puede ser un poco complicado.

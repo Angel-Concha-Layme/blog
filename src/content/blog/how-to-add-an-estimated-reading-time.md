@@ -1,5 +1,5 @@
 ---
-title: How to add an estimated reading time in AstroPaper
+title: Cómo añadir un tiempo estimado de lectura en AstroPaper
 author: Sat Naing
 pubDatetime: 2023-07-21T10:11:06.130Z
 modDatetime: 2023-12-26T08:39:25.181Z
@@ -8,22 +8,22 @@ featured: false
 draft: false
 tags:
   - FAQ
-description: How you can add an 'Reading time' in your blog posts of AstroPaper.
+description: Cómo puedes añadir un 'Tiempo de lectura' en las entradas de tu blog de AstroPaper.
 ---
 
-As the [Astro docs](https://docs.astro.build/en/recipes/reading-time/) say, we can use remark plugin to add a reading time property in our frontmatter. However, for some reason, we can't add this feature by following what stated in Astro docs. Therefore, to achieve this, we have to tweak a little bit. This post will demonstrate how we can do that.
+Como dicen los [Astro docs](https://docs.astro.build/en/recipes/reading-time/), se puede usar remark plugin para añadir una propiedad de tiempo de lectura en nuestro frontmatter. Sin embargo, por alguna razón, no podemos añadir esta característica siguiendo lo indicado en los documentos de Astro. Por lo tanto, para lograr esto, tenemos que ajustar un poco. Este post demostrará cómo podemos hacerlo.
 
-## Table of contents
+## Índice
 
-## Add reading time in PostDetails
+## Añadir tiempo de lectura en PostDetails
 
-Step (1) Install required dependencies.
+Paso (1) Instalar las dependencias necesarias.
 
 ```bash
 npm install reading-time mdast-util-to-string
 ```
 
-Step (2) Create `remark-reading-time.mjs` file under `utils` directory
+Paso (2) Crear el archivo  `remark-reading-time.mjs` en el directorio `utils`
 
 ```js
 import getReadingTime from "reading-time";
@@ -37,11 +37,11 @@ export function remarkReadingTime() {
   };
 }
 ```
+Paso (3) Añade el plugin a `astro.config.ts`.
 
-Step (3) Add the plugin to `astro.config.ts`
 
 ```js
-import { remarkReadingTime } from "./src/utils/remark-reading-time.mjs"; // make sure your relative path is correct
+import { remarkReadingTime } from "./src/utils/remark-reading-time.mjs"; // asegúrese de que su ruta relativa es correcta
 
 // https://astro.build/config
 export default defineConfig({
@@ -52,7 +52,7 @@ export default defineConfig({
   markdown: {
     remarkPlugins: [
       remarkToc,
-      remarkReadingTime, // 👈🏻 our plugin
+      remarkReadingTime, // 👈🏻 nuestro plugin
       [
         remarkCollapse,
         {
@@ -66,7 +66,7 @@ export default defineConfig({
 });
 ```
 
-Step (4) Add `readingTime` to blog schema (`src/content/config.ts`)
+Paso (4) Añadir `readingTime` al esquema del blog (`src/content/config.ts`)
 
 ```ts
 import { SITE } from "@config";
@@ -85,7 +85,7 @@ const blog = defineCollection({
 export const collections = { blog };
 ```
 
-Step (5) Create a new file called `getPostsWithRT.ts` under `src/utils` directory.
+Paso (5) Crear un nuevo fichero llamado `getPostsWithRT.ts` en el directorio `src/utils`.
 
 ```ts
 import type { MarkdownInstance } from "astro";
@@ -93,12 +93,12 @@ import type { CollectionEntry } from "astro:content";
 import { slugifyStr } from "./slugify";
 
 export const getReadingTime = async () => {
-  // Get all posts using glob. This is to get the updated frontmatter
+  // Obtener todos los posts usando glob. Esto es para obtener el frontmatter actualizado
   const globPosts = import.meta.glob("../content/blog/*.md") as Promise<
     CollectionEntry<"blog">["data"][]
   >;
 
-  // Then, set those frontmatter value in a JS Map with key value pair
+  // A continuación, establezca los valores frontmatter en un JS Map con el par clave-valor
   const mapFrontmatter = new Map();
   const globPostsValues = Object.values(globPosts);
   await Promise.all(
@@ -125,7 +125,7 @@ const getPostsWithRT = async (posts: CollectionEntry<"blog">[]) => {
 export default getPostsWithRT;
 ```
 
-Step (6) Refactor `getStaticPaths` of `/src/pages/posts/[slug].astro` as the following
+Paso (6) Refactorizar `getStaticPaths` de `/src/pages/posts/[slug].astro` como sigue
 
 ```ts
 ---
@@ -139,9 +139,9 @@ export interface Props {
 export async function getStaticPaths() {
   const posts = await getCollection("blog", ({ data }) => !data.draft);
 
-  const postsWithRT = await getPostsWithRT(posts); // replace reading time logic with this func
+  const postsWithRT = await getPostsWithRT(posts); // reemplaza la lógica del tiempo de lectura con esta func
 
-   const postResult = postsWithRT.map(post => ({ // make sure to replace posts with postsWithRT
+   const postResult = postsWithRT.map(post => ({ // asegúrese de sustituir posts por postsWithRT
     params: { slug: post.slug },
     props: { post },
   }));
@@ -149,7 +149,7 @@ export async function getStaticPaths() {
 // other codes
 ```
 
-Step (7) Refactor `PostDetails.astro` like this. Now you can access and display `readingTime` in `PostDetails.astro`
+Paso (7) Refactorizar `PostDetails.astro` así. Ahora puedes acceder y mostrar `readingTime` en `PostDetails.astro`.
 
 ```ts
 ---
@@ -166,7 +166,7 @@ const {
   author,
   description,
   ogImage,
-  readingTime, // we can now directly access readingTime from frontmatter
+  readingTime, // ahora podemos acceder directamente a readingTime desde frontmatter
   pubDatetime,
   modDatetime,
   tags } = post.data;
@@ -175,18 +175,18 @@ const {
 ---
 ```
 
-## Access reading time outside of PostDetails (optional)
+## Acceder al tiempo de lectura fuera de PostDetails (opcional)
 
-By following the previous steps, you can now access `readingTime` frontmatter property in you post details page. Sometimes, this is exactly what you want. If so, you can skip to the next section. However, if you want to display "estimated reading time" in index, posts, and technically everywhere, you need to do the following extra steps.
+Siguiendo los pasos anteriores, ahora puede acceder a la propiedad frontmatter `readingTime` en su página de detalles del post. A veces, esto es exactamente lo que quieres. Si es así, puede pasar a la siguiente sección. Sin embargo, si quiere mostrar el "tiempo estimado de lectura" en el índice, en las entradas, y técnicamente en todas partes, necesita realizar los siguientes pasos adicionales.
 
-Step (1) Update `utils/getSortedPosts.ts` as the following
+Paso (1) Actualice `utils/getSortedPosts.ts` como sigue
 
 ```ts
 import type { CollectionEntry } from "astro:content";
 import getPostsWithRT from "./getPostsWithRT";
 
 const getSortedPosts = async (posts: CollectionEntry<"blog">[]) => {
-  // make sure that this func is async
+  // asegúrate de que esta función es asíncrona
   const postsWithRT = await getPostsWithRT(posts); // add reading time
   return postsWithRT
     .filter(({ data }) => !data.draft)
@@ -204,31 +204,33 @@ const getSortedPosts = async (posts: CollectionEntry<"blog">[]) => {
 export default getSortedPosts;
 ```
 
-Step (2) Make sure to refactor every file which uses `getSortedPosts` function. You can simply add `await` keyword in front of `getSortedPosts` function.
+Paso (2) Asegúrese de refactorizar cada archivo que utiliza la función `getSortedPosts`. Puedes simplemente añadir la palabra clave `await` delante de la función `getSortedPosts`.
 
-Files that use `getSortedPosts` function are as follow
+Los archivos que utilizan la función `getSortedPosts` son los siguientes
 
 - src/pages/index.astro
 - src/pages/posts/index.astro
 - src/pages/rss.xml.ts
 - src/pages/posts/[slug].astro
 
-All you have to do is like this
+Todo lo que tiene que hacer es lo siguiente
+
 
 ```ts
 const sortedPosts = getSortedPosts(posts); // old code ❌
 const sortedPosts = await getSortedPosts(posts); // new code ✅
 ```
 
-Now you can access `readingTime` in other places besides `PostDetails`
+Ahora puedes acceder a `readingTime` en otros lugares además de `PostDetails`.
 
-## Displaying reading time (optional)
+## Mostrar el tiempo de lectura (opcional)
 
-Since you can now access `readingTime` in your post details (or everywhere if you do the above section), it's up to you to display `readingTime` wherever you want.
+Como ahora puedes acceder a `readingTime` en los detalles de tu post (o en cualquier sitio si haces lo de la sección anterior), depende de ti mostrar `readingTime` donde quieras.
 
-But in this section, I'm gonna show you how I would display `readingTime` in my components. This is optional. You can ignore this section if you want.
+Pero en esta sección, voy a mostrarte cómo mostraría `readingTime` en mis componentes. Esto es opcional. Puedes ignorar esta sección si quieres.
 
-Step (1) Update `Datetime` component to display `readingTime`
+Paso (1) Actualizar el componente `Datetime` para mostrar `readingTime
+
 
 ```tsx
 import { LOCALE } from "@config";
@@ -257,9 +259,9 @@ export default function Datetime({
 }
 ```
 
-Step (2) Then, pass `readingTime` props from its parent component.
+Paso (2) A continuación, pasar `readingTime` props de su componente padre.
 
-file: Card.tsx
+archivo: Card.tsx
 
 ```ts
 export default function Card({ href, frontmatter, secHeading = true }: Props) {
@@ -276,7 +278,7 @@ export default function Card({ href, frontmatter, secHeading = true }: Props) {
 }
 ```
 
-file: PostDetails.tsx
+archivo: PostDetails.tsx
 
 ```jsx
 // Other Codes
@@ -294,8 +296,6 @@ file: PostDetails.tsx
 // Other Codes
 ```
 
-## Conclusion
+## Conclusión
 
-By following the provided steps and tweaks, you can now incorporate this useful feature into your content. I hope this post helps you adding `readingTime` in your blog. AstroPaper might include reading time by default in future releases. 🤷🏻‍♂️
-
-Kyay Zuu for Reading 🙏🏻
+Siguiendo los pasos y ajustes indicados, ya puedes incorporar esta útil función a tu contenido. Espero que este post te ayude a añadir `readingTime` en tu blog. AstroPaper podría incluir el tiempo de lectura por defecto en futuras versiones. 🤷🏻‍♂️

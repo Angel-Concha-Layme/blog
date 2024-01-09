@@ -1,73 +1,71 @@
 ---
 author: Sat Naing
 pubDatetime: 2022-09-25T15:20:35Z
-title: Customizing AstroPaper theme color schemes
+title: Personalización de los esquemas de color del tema AstroPaper
 featured: false
 draft: false
 tags:
   - color-schemes
   - docs
-description:
-  How you can enable/disable light & dark mode; and customize color schemes
-  of AstroPaper theme.
+description: Cómo puedes habilitar/deshabilitar el modo claro y oscuro; y personalice los esquemas de color.
 ---
 
-This post will explain how you can enable/disable light & dark mode for the website. Moreover, you'll learn how you can customize color schemes of the entire website.
+Esta publicación explicará cómo puedes activar o desactivar el modo claro y oscuro para el sitio web. Además, aprenderás cómo puedes personalizar los esquemas de colores de todo el sitio web.
 
-## Table of contents
+## Tabla de contenidos
 
-## Enable/disable light & dark mode
+## Activar/desactivar el modo claro y oscuro
 
-AstroPaper theme will include light and dark mode by default. In other words, there will be two color schemes\_ one for light mode and another for dark mode. This default behavior can be disabled in SITE configuration object of the `src/config.ts` file.
+El tema AstroPaper incluirá por defecto el modo claro y oscuro. En otras palabras, habrá dos esquemas de colores: uno para el modo claro y otro para el modo oscuro. Este comportamiento predeterminado se puede desactivar en el objeto de configuración del SITIO del archivo `src/config.ts`.
 
 ```js
-// file: src/config.ts
+// archivo: src/config.ts
 export const SITE = {
   website: "https://astro-paper.pages.dev/",
   author: "Sat Naing",
-  desc: "A minimal, responsive and SEO-friendly Astro blog theme.",
+  desc: "Un tema de blog Astro minimalista, adaptable y amigable con SEO.",
   title: "AstroPaper",
   ogImage: "astropaper-og.jpg",
-  lightAndDarkMode: true, // true by default
+  lightAndDarkMode: true, // verdadero por defecto
   postPerPage: 3,
 };
 ```
 
-To disable `light & dark mode` set `SITE.lightAndDarkMode` to `false`.
+Para desactivar el `light & dark mode` establece `SITE.lightAndDarkMode` en `false`.
 
-## Choose primary color scheme
+## Elegir esquema de color primario
 
-By default, if we disable `SITE.lightAndDarkMode`, we will only get system's prefers-color-scheme.
+Por defecto, si desactivamos `SITE.lightAndDarkMode`, solo obtendremos el esquema de colores preferido por el sistema.
 
-Thus, to choose primary color scheme instead of prefers-color-scheme, we have to set color scheme in the primaryColorScheme variable inside `public/toggle-theme.js`.
+Por lo tanto, para elegir un esquema de color primario en lugar del esquema de colores preferido por el sistema, debemos establecer el esquema de colores en la variable primaryColorScheme dentro de `public/toggle-theme.js`.
 
 ```js
-/* file: public/toggle-theme.js */
-const primaryColorScheme = ""; // "light" | "dark"
+/* archivo: public/toggle-theme.js */
+const primaryColorScheme = ""; // establecer "light" o "dark" aquí
 
-// Get theme data from local storage
+// Obtener los datos del tema del almacenamiento local
 const currentTheme = localStorage.getItem("theme");
 
-// other codes etc...
+// otros códigos etc...
 ```
 
-The **primaryColorScheme** variable can hold two values\_ `"light"`, `"dark"`. You can leave the empty string (default) if you don't want to specify the primary color scheme.
+La variable **primaryColorScheme** puede contener dos valores: `light`, `dark`. Puedes dejar la cadena vacía (predeterminado) si no quieres especificar el esquema de color primario.
 
-- `""` - system's prefers-color-scheme. (default)
-- `"light"` - use light mode as primary color scheme.
-- `"dark"` - use dark mode as primary color scheme.
+- `""` - el sistema prefiere el esquema de color. (predeterminado)
+- `"light"` - utiliza el modo claro como esquema de color primario.
+- `"dark"` - utiliza el modo oscuro como esquema de color primario.
 
-<details><summary>Why 'primaryColorScheme' is not inside config.ts?</summary>
+<details><summary>¿Por qué 'primaryColorScheme' no está dentro de config.ts?</summary>
 
-> To avoid color flickering on page reload, we have to place the toggle-switch JavaScript codes as early as possible when the page loads. It solves the problem of flickering, but as a trade-off, we cannot use ESM imports anymore.
+> Para evitar el parpadeo de colores al recargar la página, tenemos que colocar los códigos de JavaScript del interruptor de cambio tan pronto como sea posible cuando la página se carga. Esto soluciona el problema del parpadeo, pero como compensación, ya no podemos usar importaciones de ESM.
 
-[Click here](https://docs.astro.build/en/reference/directives-reference/#isinline) to know more about Astro's `is:inline` script.
+[Click here](https://docs.astro.build/en/reference/directives-reference/#isinline) Para saber más sobre el script `is:inline` de Astro.
 
 </details>
 
-## Customize color schemes
+## Personalizar esquemas de colores
 
-Both light & dark color schemes of AstroPaper theme can be customized. You can do this in `src/styles/base.css` file.
+Ambos esquemas de colores, claro y oscuro, del tema AstroPaper pueden personalizarse. Puedes hacer esto en el archivo `src/styles/base.css`.
 
 ```css
 /* file: src/styles/base.css */
@@ -97,22 +95,29 @@ Both light & dark color schemes of AstroPaper theme can be customized. You can d
 }
 ```
 
-In AstroPaper theme, `:root` and `html[data-theme="light"]` selectors are used as the light color scheme and `html[data-theme="dark"]` is used the dark color scheme. If you want to customize your custom color scheme, you have to specify your light color scheme inside `:root`,`html[data-theme="light"]` and dark color scheme inside `html[data-theme="dark"]`.
+En el tema AstroPaper, se utilizan los selectores `:root` y `html[data-theme="light"]` como el esquema de color claro y `html[data-theme="dark"]` se utiliza el esquema de color oscuro. Si quieres personalizar tu esquema de color personalizado, debes especificar tu esquema de color claro dentro de `:root`,`html[data-theme="light"]` y el esquema de color oscuro dentro de `html[data-theme="dark"]`.
 
-Colors are declared in CSS custom property (CSS Variable) notation. Color property values are written in rgb values. (Note: instead of `rgb(40, 39, 40)`, only specify `40, 39, 40`)
+Los colores se declaran en la notación de propiedad personalizada CSS (variable CSS). Los valores de las propiedades de color se escriben en valores rgb. (Nota: en lugar de `rgb(40, 39, 40)`, solo especifica `40, 39, 40`)
 
-Here is the detail explanation of color properties.
+Aquí está la explicación detallada de las propiedades de color.
 
-| Color Property       | Definition & Usage                                         |
-| -------------------- | ---------------------------------------------------------- |
-| `--color-fill`       | Primary color of the website. Usually the main background. |
-| `--color-text-base`  | Secondary color of the website. Usually the text color.    |
-| `--color-accent`     | Accent color of the website. Link color, hover color etc.  |
-| `--color-card`       | Card, scrollbar and code background color (like `this`).   |
-| `--color-card-muted` | Card and scrollbar background color for hover state etc.   |
-| `--color-border`     | Border color. Especially used in horizontal row (hr)       |
+| Propiedad de color   | Definición y Uso                                                                                 |
+| -------------------- | ------------------------------------------------------------------------------------------------ |
+| `--color-fill`       | Color principal del sitio web. Generalmente el fondo principal.                                  |
+| `--color-text-base`  | Color secundario del sitio web. Generalmente el color del texto.                                 |
+|                      |
+| `--color-accent`     | Color de acento del sitio web. (link color, hover color, etc.)                                   |
+|                      |
+| `--color-card`       | Card, scrollbar and code background color (like `this`).                                         |
+| `--color-card-muted` | Color de fondo de la tarjeta y la barra de desplazamiento para el estado de desplazamiento, etc. |
+| `--color-border`     | Color del borde. Especialmente utilizado en fila horizontal (hr)                                 |
 
-Here is an example of changing the light color scheme.
+
+
+A continuación se muestra un ejemplo de cambio del esquema de color claro.
+
+
+
 
 ```css
 @layer base {
@@ -129,4 +134,5 @@ Here is an example of changing the light color scheme.
 }
 ```
 
-> Check out some [predefined color schemes](https://astro-paper.pages.dev/posts/predefined-color-schemes/) AstroPaper has already crafted for you.
+> Consulta algunos [esquemas de color predefinidos](https://astro-paper.pages.dev/posts/predefined-color-schemes/) que AstroPaper ya ha creado para ti.
+

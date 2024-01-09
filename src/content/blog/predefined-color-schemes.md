@@ -1,26 +1,27 @@
 ---
 author: Sat Naing
 pubDatetime: 2022-09-26T12:13:24Z
-title: Predefined color schemes
+title: Combinaciones de colores predefinidas
 slug: predefined-color-schemes
 featured: false
 draft: false
 tags:
   - color-schemes
-description:
-  Some of the well-crafted, predefined color schemes for AstroPaper blog
-  theme.
+description: Algunas de las combinaciones de colores predefinidas para AstroPaper.
 ---
 
-I've crafted some predefined color schemes for this AstroPaper blog theme. You can replace these color schemes with the original ones.
+He creado algunos esquemas de color predefinidos para este tema de blog AstroPaper. Puede reemplazar estos esquemas de color con los originales.
 
-If you don't know how you can configure color schemes, check [this blog post](https://astro-paper.pages.dev/posts/customizing-astropaper-theme-color-schemes/).
+Si no sabe cómo configurar las combinaciones de colores, consulte [esta entrada del blog](https://astro-paper.pages.dev/posts/customizing-astropaper-theme-color-schemes/).
 
-## Table of contents
+Si no sabe cómo configurar las combinaciones de colores, consulte [esta entrada del blog](https://astro-paper.pages.dev/posts/customizing-astropaper-theme-color-schemes/).
 
-## Light color schemes
+## Tabla de contenidos
 
-Light color scheme has to be defined using the css selector `:root` and `html[data-theme="light"]`.
+## Esquemas de colores claros
+
+El esquema de colores claros debe definirse utilizando el selector css `:root` y `html[data-theme="light"]`.
+
 
 ### Lobster
 
@@ -70,9 +71,9 @@ html[data-theme="light"] {
 }
 ```
 
-## Dark color schemes
+## Esquemas de color oscuro
 
-Light color scheme has to be defined as `html[data-theme="dark"]`.
+La combinación de colores claros debe definirse como `html[data-theme="dark"]`.
 
 ### AstroPaper 1 original Dark Theme
 

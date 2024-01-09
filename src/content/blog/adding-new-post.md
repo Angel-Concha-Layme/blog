@@ -1,170 +1,168 @@
 ---
-author: Sat Naing
+autor: Sat Naing
 pubDatetime: 2022-09-23T15:22:00Z
 modDatetime: 2023-12-21T09:12:47.400Z
-title: Adding new posts in AstroPaper theme
+title: Añadiendo nuevas publicaciones
 slug: adding-new-posts-in-astropaper-theme
-featured: true
-draft: false
-tags:
+destacado: true
+borrador: false
+etiquetas:
   - docs
-description:
-  Some rules & recommendations for creating or adding new posts using AstroPaper
-  theme.
+description: Algunas reglas y recomendaciones para crear o añadir nuevas publicaciones usando el tema AstroPaper.
 ---
 
-Here are some rules/recommendations, tips & ticks for creating new posts in AstroPaper blog theme.
+Aquí hay algunas reglas/recomendaciones, consejos y trucos para crear nuevas publicaciones en el tema de blog AstroPaper.
 
-## Table of contents
+## Tabla de contenidos
 
 ## Frontmatter
 
-Frontmatter is the main place to store some important information about the blog post (article). Frontmatter lies at the top of the article and is written in YAML format. Read more about frontmatter and its usage in [astro documentation](https://docs.astro.build/en/guides/markdown-content/).
+Frontmatter es el lugar principal para almacenar información importante sobre la publicación del blog (artículo). Frontmatter se encuentra en la parte superior del artículo y está escrito en formato YAML. Lee más sobre frontmatter y su uso en [documentación de astro](https://docs.astro.build/en/guides/markdown-content/).
 
-Here is the list of frontmatter property for each post.
+Aquí está la lista de propiedades de frontmatter para cada publicación.
 
-| Property           | Description                                                                                 | Remark                                        |
-| ------------------ | ------------------------------------------------------------------------------------------- | --------------------------------------------- |
-| **_title_**        | Title of the post. (h1)                                                                     | required<sup>\*</sup>                         |
-| **_description_**  | Description of the post. Used in post excerpt and site description of the post.             | required<sup>\*</sup>                         |
-| **_pubDatetime_**  | Published datetime in ISO 8601 format.                                                      | required<sup>\*</sup>                         |
-| **_modDatetime_**  | Modified datetime in ISO 8601 format. (only add this property when a blog post is modified) | optional                                      |
-| **_author_**       | Author of the post.                                                                         | default = SITE.author                         |
-| **_slug_**         | Slug for the post. This field is optional but cannot be an empty string. (slug: ""❌)       | default = slugified file name                 |
-| **_featured_**     | Whether or not display this post in featured section of home page                           | default = false                               |
-| **_draft_**        | Mark this post 'unpublished'.                                                               | default = false                               |
-| **_tags_**         | Related keywords for this post. Written in array yaml format.                               | default = others                              |
-| **_ogImage_**      | OG image of the post. Useful for social media sharing and SEO.                              | default = SITE.ogImage or generated OG image  |
-| **_canonicalURL_** | Canonical URL (absolute), in case the article already exists on other source.               | default = `Astro.site` + `Astro.url.pathname` |
+| Propiedad          | Descripción                                                                                                                 | Observación                                       |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| **_title_**        | Título de la publicación. (h1)                                                                                              | requerido<sup>\*</sup>                            |
+| **_description_**  | Descripción de la publicación. Se utiliza en el extracto de la publicación y en la descripción del sitio de la misma.       | requerido<sup>\*</sup>                            |
+| **_pubDatetime_**  | Fecha y hora de publicación en formato ISO 8601.                                                                            | requerido<sup>\*</sup>                            |
+| **_modDatetime_**  | Fecha y hora de modificación en formato ISO 8601. (solo añadir esta propiedad cuando se modifique una publicación del blog) | opcional                                          |
+| **_author_**       | Autor de la publicación.                                                                                                    | por defecto = SITE.author                         |
+| **_slug_**         | Slug para la publicación. Este campo es opcional, pero no puede estar vacío. (slug: ""❌)                                   | por defecto = nombre del archivo slugificado      |
+| **_featured_**     | Indica si mostrar o no esta publicación en la sección destacada de la página principal.                                     | por defecto = falso                               |
+| **_draft_**        | Marca esta publicación como 'no publicada'.                                                                                 | por defecto = falso                               |
+| **_tags_**         | Palabras clave relacionadas con esta publicación. Escritas en formato de array yaml.                                        | por defecto = otros                               |
+| **_ogImage_**      | Imagen OG de la publicación. Útil para compartir en redes sociales y SEO.                                                   | por defecto = SITE.ogImage o imagen OG generada   |
+| **_canonicalURL_** | URL canónica (absoluta), en caso de que el artículo ya exista en otra fuente.                                               | por defecto = `Astro.site` + `Astro.url.pathname` |
 
-> Tip! You can get ISO 8601 datetime by running `new Date().toISOString()` in the console. Make sure you remove quotes though.
+> ¡Consejo! Puedes obtener la fecha y hora en formato ISO 8601 ejecutando `new Date().toISOString()` en la consola. Asegúrate de quitar las comillas.
 
-Only `title`, `description` and `pubDatetime` fields in frontmatter must be specified.
+Solo los campos `title`, `description` y `pubDatetime` en el frontmatter deben especificarse.
 
-Title and description (excerpt) are important for search engine optimization (SEO) and thus AstroPaper encourages to include these in blog posts.
+El título y la descripción (extracto) son importantes para la optimización de motores de búsqueda (SEO) y, por lo tanto, AstroPaper recomienda incluirlos en las publicaciones del blog.
 
-`slug` is the unique identifier of the url. Thus, `slug` must be unique and different from other posts. The whitespace of `slug` should to be separated with `-` or `_` but `-` is recommended. Slug is automatically generated using the blog post file name. However, you can define your `slug` as a frontmatter in your blog post.
+`slug` es el identificador único de la URL. Por lo tanto, `slug` debe ser único y diferente de otras publicaciones. Los espacios en blanco de `slug` deben separarse con `-` o `_`, pero se recomienda `-`. El slug se genera automáticamente utilizando el nombre del archivo de la publicación del blog. Sin embargo, puedes definir tu `slug` como un frontmatter en tu publicación del blog.
 
-For example, if the blog file name is `adding-new-post.md` and you don't specify the slug in your frontmatter, Astro will automatically create a slug for the blog post using the file name. Thus, the slug will be `adding-new-post`. But if you specify the `slug` in the frontmatter, this will override the default slug. You can read more about this in [Astro Docs](https://docs.astro.build/en/guides/content-collections/#defining-custom-slugs).
+Por ejemplo, si el nombre del archivo del blog es `adding-new-post.md` y no especificas el slug en tu frontmatter, Astro creará automáticamente un slug para la publicación del blog utilizando el nombre del archivo. Por lo tanto, el slug será `adding-new-post`. Pero si especificas el `slug` en el frontmatter, esto anulará el slug predeterminado. Puedes leer más sobre esto en [Documentación de Astro](https://docs.astro.build/en/guides/content-collections/#defining-custom-slugs).
 
-If you omit `tags` in a blog post (in other words, if no tag is specified), the default tag `others` will be used as a tag for that post. You can set the default tag in the `/src/content/config.ts` file.
+Si omites `tags` en una publicación del blog (en otras palabras, si no se especifica ninguna etiqueta), la etiqueta predeterminada `others` se utilizará como etiqueta para esa publicación. Puedes establecer la etiqueta predeterminada en el archivo `/src/content/config.ts`.
 
 ```ts
 // src/content/config.ts
 export const blogSchema = z.object({
   // ---
   draft: z.boolean().optional(),
-  tags: z.array(z.string()).default(["others"]), // replace "others" with whatever you want
+  tags: z.array(z.string()).default(["others"]), // reemplaza "others" por lo que desees
   // ---
 });
 ```
 
-### Sample Frontmatter
+### Ejemplo de Frontmatter
 
-Here is the sample frontmatter for a post.
+Aquí está el frontmatter de ejemplo para una publicación.
 
 ```yaml
 # src/content/blog/sample-post.md
 ---
-title: The title of the post
-author: your name
+title: El título de la publicación
+author: tu nombre
 pubDatetime: 2022-09-21T05:17:19Z
-slug: the-title-of-the-post
+slug: el-titulo-de-la-publicacion
 featured: true
 draft: false
 tags:
-  - some
-  - example
-  - tags
+  - algun
+  - ejemplo
+  - etiquetas
 ogImage: ""
-description: This is the example description of the example post.
+description: Esta es la descripción de ejemplo de la publicación de ejemplo.
 canonicalURL: https://example.org/my-article-was-already-posted-here
 ---
 ```
 
-## Adding table of contents
+## Añadir tabla de contenidos
 
-By default, a post (article) does not include any table of contents (toc). To include toc, you have to specify it in a specific way.
+Por defecto, una publicación (artículo) no incluye ninguna tabla de contenidos (toc). Para incluir toc, debes especificarlo de una manera específica.
 
-Write `Table of contents` in h2 format (## in markdown) and place it where you want it to be appeared on the post.
+Escribe `Tabla de contenidos` en formato h2 (## en markdown) y colócalo donde quieras que aparezca en la publicación.
 
-For instance, if you want to place your table of contents just under the intro paragraph (like I usually do), you can do that in the following way.
+Por ejemplo, si quieres colocar tu tabla de contenidos justo debajo del párrafo introductorio (como suelo hacer), puedes hacerlo de la siguiente manera.
 
 ```md
 ---
-# some frontmatter
+# algún frontmatter
 ---
 
-Here are some recommendations, tips & ticks for creating new posts in AstroPaper blog theme.
+Aquí hay algunas recomendaciones, consejos y trucos para crear nuevas publicaciones en el tema de blog AstroPaper.
 
-## Table of contents
+## Tabla de contenidos
 
-<!-- the rest of the post -->
+<!-- el resto de la publicación -->
 ```
 
-## Headings
+## Encabezados
 
-There's one thing to note about headings. The AstroPaper blog posts use title (title in the frontmatter) as the main heading of the post. Therefore, the rest of the heading in the post should be using h2 \~ h6.
+Hay algo que debes tener en cuenta acerca de los encabezados. Las publicaciones de blog de AstroPaper utilizan el título (title en el frontmatter) como el encabezado principal de la publicación. Por lo tanto, el resto de los encabezados en la publicación deben usar h2 ~ h6.
 
-This rule is not mandatory, but highly recommended for visual, accessibility and SEO purposes.
+Esta regla no es obligatoria, pero se recomienda encarecidamente por motivos visuales, de accesibilidad y SEO.
 
-## Storing Images for Blog Content
+## Almacenar imágenes para contenido de blo
 
-Here are two methods for storing images and displaying them inside a markdown file.
+Aquí hay dos métodos para almacenar imágenes y mostrarlas dentro de un archivo markdown.
 
-> Note! If it's a requirement to style optimized images in markdown you should [use MDX](https://docs.astro.build/en/guides/images/#images-in-mdx-files).
+> ¡Nota! Si es un requisito estilizar imágenes optimizadas en markdown deberías[usar MDX](https://docs.astro.build/en/guides/images/#images-in-mdx-files).
 
-### Inside `src/assets/` directory (recommended)
+### Dentro del directorio `src/assets/` (recomendado)
 
-You can store images inside `src/assets/` directory. These images will be automatically optimized by Astro through [Image Service API](https://docs.astro.build/en/reference/image-service-reference/).
+Puedes almacenar imágenes dentro del directorio `src/assets/.` Estas imágenes serán automáticamente optimizadas por Astro a través de [API de Servicio de Imagen](https://docs.astro.build/en/reference/image-service-reference/).
 
-You can use relative path or alias path (`@assets/`) to serve these images.
+Puedes usar la ruta relativa o la ruta alias (`@assets/`) para servir estas imágenes.
 
-Example: Suppose you want to display `example.jpg` whose path is `/src/assets/images/example.jpg`.
+Ejemplo: Supongamos que deseas mostrar `example.jpg` cuya ruta es `/src/assets/images/example.jpg`.
 
 ```md
-![something](@assets/images/example.jpg)
+![algo](@assets/images/example.jpg)
 
-<!-- OR -->
+<!-- O -->
 
-![something](../../assets/images/example.jpg)
+![algo](../../assets/images/example.jpg)
 
-<!-- Using img tag or Image component won't work ❌ -->
-<img src="@assets/images/example.jpg" alt="something">
-<!-- ^^ This is wrong -->
+<!-- Usar etiqueta img o componente Image no funcionará ❌ -->
+<img src="@assets/images/example.jpg" alt="algo">
+<!-- ^^ Esto es incorrecto -->
 ```
 
-> Technically, you can store images inside any directory under `src`. In here, `src/assets` is just a recommendation.
+> Técnicamente, puedes almacenar imágenes dentro de cualquier directorio bajo `src`. Aquí, `src/assets` es solo una recomendación.
 
-### Inside `public` directory
+### Dentro del directorio `public`
 
-You can store images inside the `public` directory. Keep in mind that images stored in the `public` directory remain untouched by Astro, meaning they will be unoptimized and you need to handle image optimization by yourself.
+Puedes almacenar imágenes dentro del directorio `public`. Ten en cuenta que las imágenes almacenadas en el directorio `public` permanecen sin tocar por Astro, lo que significa que no estarán optimizadas y necesitarás manejar la optimización de imágenes por ti mismo.
 
-For these images, you should use an absolute path; and these images can be displayed using [markdown annotation](https://www.markdownguide.org/basic-syntax/#images-1) or [HTML img tag](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img).
+Para estas imágenes, debes usar una ruta absoluta; y estas imágenes pueden mostrarse utilizando [anotación de markdown](https://www.markdownguide.org/basic-syntax/#images-1) o [etiqueta HTML img](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img).
 
-Example: Assume `example.jpg` is located at `/public/assets/images/example.jpg`.
+Ejemplo: Supongamos que `example.jpg` está ubicada en `/public/assets/images/example.jpg`.
 
 ```md
-![something](/assets/images/example.jpg)
+![algo](/assets/images/example.jpg)
 
-<!-- OR -->
+<!-- O -->
 
-<img src="/assets/images/example.jpg" alt="something">
+<img src="/assets/images/example.jpg" alt="algo">
 ```
 
 ## Bonus
 
-### Image compression
+### Compresión de imágenes
 
-When you put images in the blog post (especially for images under `public` directory), it is recommended that the image is compressed. This will affect the overall performance of the website.
+Cuando incluyas imágenes en la publicación del blog (especialmente para imágenes bajo el directorio `public`), se recomienda que la imagen esté comprimida. Esto afectará el rendimiento general del sitio web.
 
-My recommendation for image compression sites.
+Mis recomendaciones para sitios de compresión de imágenes:
 
 - [TinyPng](https://tinypng.com/)
 - [TinyJPG](https://tinyjpg.com/)
 
-### OG Image
+### Imagen OG
 
-The default OG image will be placed if a post does not specify the OG image. Though not required, OG image related to the post should be specify in the frontmatter. The recommended size for OG image is **_1200 X 640_** px.
+La imagen OG predeterminada se colocará si una publicación no especifica la imagen OG. Aunque no es obligatorio, se debe especificar en el frontmatter una imagen OG relacionada con la publicación. El tamaño recomendado para la imagen OG es **_1200 X 640_** px.
 
-> Since AstroPaper v1.4.0, OG images will be generated automatically if not specified. Check out [the announcement](https://astro-paper.pages.dev/posts/dynamic-og-image-generation-in-astropaper-blog-posts/).
+> Desde AstroPaper v1.4.0, las imágenes OG se generarán automáticamente si no se especifican. Consulta [el anuncio](https://astro-paper.pages.dev/posts/dynamic-og-image-generation-in-astropaper-blog-posts/).

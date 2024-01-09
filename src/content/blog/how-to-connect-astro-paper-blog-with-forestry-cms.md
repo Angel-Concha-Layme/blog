@@ -1,5 +1,5 @@
 ---
-title: How to connect AstroPaper blog with Forestry CMS
+title: Cómo conectar el blog AstroPaper con el CMS Forestry
 author: Sat Naing
 pubDatetime: 2022-09-21T05:17:19Z
 slug: how-to-connect-astro-paper-blog-with-forestry-cms
@@ -11,116 +11,125 @@ tags:
   - astro-paper
 ogImage: https://res.cloudinary.com/noezectz/v1663745737/astro-paper/astropaper-x-forestry-og_kqfwp0.png
 description:
-  Step by step process of connecting Astro-Paper blog theme with Forestry
-  Headless CMS.
+  Proceso paso a paso para conectar el tema de blog Astro-Paper con Forestry Headless CMS.
 ---
 
-> Important!!! Forestry is going to be discontinued on April 22nd, 2023. You can [read their announcement](https://forestry.io/blog/forestry.io-end-of-life/) for more info.
 
-In this article, I will explain step by step process of connecting AstroPaper theme with the Forestry headless CMS. So, let's get started 🎉
+> ¡¡¡Importante!!! La silvicultura dejará de funcionar el 22 de abril de 2023. Puedes [leer su anuncio](https://forestry.io/blog/forestry.io-end-of-life/) para más información.
 
-## Table of contents
+En este artículo, voy a explicar paso a paso el proceso de conectar el tema AstroPaper con el CMS headless Forestry. Así que, vamos a empezar 🎉
 
-## What is Forestry?
 
-[Forestry](https://forestry.io/ "Forestry Website") is a git-based headless CMS and we can manage our markdown contents easily by using that. Although it is not an open-sourced CMS, it has a good free plan by which we can import up to 3 sites (3 repositories). In this article, I'll demonstrate how we can use Forestry as git-based CMS of our AstroPaper blog theme.
+## Tabla de contenidos
 
-## Login / Register an account at Forestry.io
+## ¿Qué es Forestry?
 
-First of all, you have to create an account at [Forestry website](https://app.forestry.io/login "Forestry Login Page"). I usually sign up with my Github account.
+[Forestry](https://forestry.io/ "Forestry Website") es un CMS headless basado en git y podemos gestionar nuestros contenidos markdown fácilmente usándolo. Aunque no es un CMS de código abierto, tiene un buen plan gratuito por el cual podemos importar hasta 3 sitios (3 repositorios). En este artículo, voy a demostrar cómo podemos utilizar Forestry como CMS basado en git de nuestro tema de blog AstroPaper.
 
-![Forestry Login page](https://res.cloudinary.com/noezectz/v1663739096/astro-paper/Forestry-io_hk5yzv.png)
 
-## Import AstroPaper site (repository)
+## Iniciar sesión / Registrar una cuenta en Forestry.io
 
-This part is importing the repository to Forestry and a little bit of set up process.
+En primer lugar, tienes que crear una cuenta en [Forestry website](https://app.forestry.io/login "Forestry Login Page"). Yo suelo registrarme con mi cuenta de Github.
 
-### Add Site
+![Página de inicio de sesión de Forestry](https://res.cloudinary.com/noezectz/v1663739096/astro-paper/Forestry-io_hk5yzv.png)
 
-After logging in/signing up an account, import your AstroPaper site by clicking "Add Site" button.
+## Importar el sitio AstroPaper (repositorio)
 
-![Forestry 'My sites' page](https://res.cloudinary.com/noezectz/v1663739752/astro-paper/Forestry-io_1_z1bdyd.png)
 
-### Select SSG
+Esta parte es importar el repositorio a Forestry y un poco de proceso de configuración.
 
-In this case, just choose "Others"
+### Añadir sitio
 
-![Selecting 'Others' as a site generator](https://res.cloudinary.com/noezectz/v1663740872/astro-paper/Forestry-io_2_blrrw2.png)
+Después de iniciar sesión/registrar una cuenta, importe su sitio AstroPaper haciendo clic en el botón "Añadir sitio".
+
+[Página 'Mis sitios' de Forestry](https://res.cloudinary.com/noezectz/v1663739752/astro-paper/Forestry-io_1_z1bdyd.png)
+
+### Seleccionar SSG
+
+En este caso, simplemente seleccione "Otros
+
+![Seleccionar 'Otros' como generador de sitios](https://res.cloudinary.com/noezectz/v1663740872/astro-paper/Forestry-io_2_blrrw2.png)
+
 
 ### Select Git Provider
 
-My git provider is Github and I assume yours is the same. So, choose "Github".
+Mi proveedor de git es Github y supongo que el tuyo es el mismo. Así que elige "Github".
 
-![Selecting Github as a git provider](https://res.cloudinary.com/noezectz/v1663740922/astro-paper/Forestry-io_3_pj1v8v.png)
+![Seleccionar Github como proveedor de git](https://res.cloudinary.com/noezectz/v1663740922/astro-paper/Forestry-io_3_pj1v8v.png)
 
-After this, the process of importing site (repo) is done.
 
-## Set up Sidebar
 
-The next phase after importing site is setting up sidebar menu. You can add many sidebar menu as you want. However, I'll only add one sidebar menu in this case.
+Después de esto, se realiza el proceso de importación del sitio (repo).
 
-Navigate to "Finish setup process" > "Set up sidebar" and click "Configure sitebar"
 
-![Forestry welcome screen](https://res.cloudinary.com/noezectz/v1663740974/astro-paper/forestry-io_4_j35uk9.png)
+## ## Configurar la barra lateral (sidebar)
 
-Then, click "Add Section" button.
+La siguiente fase después de importar el sitio es configurar el menú lateral. Puedes agregar tantos menús laterales como quieras. Sin embargo, solo agregaré un menú lateral en este caso.
 
-![Clicking 'Add Section' for sidebar](https://res.cloudinary.com/noezectz/v1663741011/astro-paper/forestry-io_5_sxtgvx.png)
+Navega a "Finalizar proceso de configuración" > "Configurar menú lateral" y haz clic en "Configurar menú lateral"
 
-After that, choose DIRECTORY for the Section Type.
+![Pantalla de bienvenida de Forestry](https://res.cloudinary.com/noezectz/v1663740974/astro-paper/forestry-io_4_j35uk9.png)
 
-![Choosing 'DIRECTORY' as the Selection Type](https://res.cloudinary.com/noezectz/v1663741052/astro-paper/forestry-io_6_lddmkx.png)
+Luego, haz clic en el botón "Agregar sección".
 
-Then, configure the directory section. You can follow along with my setup.
+![Haciendo clic en 'Agregar sección' para el menú lateral](https://res.cloudinary.com/noezectz/v1663741011/astro-paper/forestry-io_5_sxtgvx.png)
 
-![Configuring the Directory Section](https://res.cloudinary.com/noezectz/v1663741105/astro-paper/forestry-io_7_jkwgi1.png)
+Después de eso, elige DIRECTORIO para el Tipo de Sección.
 
-After this step, you should see a sidebar menu "Blog Posts" and some blog posts.
+![Eligiendo 'DIRECTORIO' como el Tipo de Selección](https://res.cloudinary.com/noezectz/v1663741052/astro-paper/forestry-io_6_lddmkx.png)
 
-## Set up Media Import
+Luego, configura la sección del directorio. Puedes seguir mi configuración.
 
-In Forestry CMS, you can set up different options for media (aka assets) such as Cloudinary, git commit media etc. I usually store my assets in [Cloudinary](https://cloudinary.com/). To set up media import, go to Settings > Media. Then select your image storage provider. (I chose Cloudinary).
+![Configurando la Sección del Directorio](https://res.cloudinary.com/noezectz/v1663741105/astro-paper/forestry-io_7_jkwgi1.png)
 
-![Setting up 'Cloudinary' as the media import](https://res.cloudinary.com/noezectz/v1663741636/astro-paper/forestry-io-media-import_1_f8i4lm.png)
+Después de este paso, deberías ver un menú lateral "Publicaciones del Blog" y algunas publicaciones del blog.
 
-You can see details of Forestry Cloudinary setup at [Forestry documentation](https://forestry.io/docs/media/cloudinary/).
+## Configuración de Importación de Medios
 
-## Set up Front matter template
+En Forestry CMS, puedes configurar diferentes opciones para los medios (también conocidos como activos) tales como Cloudinary, commit de medios en git, etc. Usualmente almaceno mis activos en [Cloudinary](https://cloudinary.com/). Para configurar la importación de medios, ve a Configuración > Medios. Luego selecciona tu proveedor de almacenamiento de imágenes. (Yo elegí Cloudinary).
 
-After setting everything up, you can set up front matter template for your future blog post. To set up front matter template, navigate to "Front matter" menu on the sidebar.
+![Configurando 'Cloudinary' como la importación de medios](https://res.cloudinary.com/noezectz/v1663741636/astro-paper/forestry-io-media-import_1_f8i4lm.png)
 
-Then, click "Add Template" button at the top right corner.
+Puedes ver los detalles de la configuración de Cloudinary en Forestry en [documentación de Forestry](https://forestry.io/docs/media/cloudinary/).
 
-![Front Matter Templates page](https://res.cloudinary.com/noezectz/v1663742060/astro-paper/forestry-io-frontmatter_yskfvn.png)
+## Configuración de la Plantilla de Front Matter
 
-Select new template based on existing document.
+Después de configurar todo, puedes configurar la plantilla de front matter para tus futuras publicaciones en el blog. Para configurar la plantilla de front matter, navega al menú "Front Matter" en la barra lateral.
 
-![Creating new template based on existing document](https://res.cloudinary.com/noezectz/v1663742179/astro-paper/forestry-io-existing-doc_bwcb9q.png)
+Luego, haz clic en el botón "Agregar Plantilla" en la esquina superior derecha.
 
-Then, add template name and choose one of my document page as template.
+![Página de Plantillas de Front Matter](https://res.cloudinary.com/noezectz/v1663742060/astro-paper/forestry-io-frontmatter_yskfvn.png)
 
-As the final setup, make some adjustment in the front matter field settings.
+Selecciona una nueva plantilla basada en un documento existente.
 
-![Making some adjustment in a front matter field setting](https://res.cloudinary.com/noezectz/v1663742450/astro-paper/forestry-io-fm-config_jqmgwz.png)
+![Creando una nueva plantilla basada en un documento existente](https://res.cloudinary.com/noezectz/v1663742179/astro-paper/forestry-io-existing-doc_bwcb9q.png)
 
-Here are some adjustments you have to make.
+Luego, añade el nombre de la plantilla y elige una de mis páginas de documento como plantilla.
+
+Como configuración final, realiza algunos ajustes en los ajustes del campo de front matter.
+
+![Realizando algunos ajustes en la configuración de un campo de front matter](https://res.cloudinary.com/noezectz/v1663742450/astro-paper/forestry-io-fm-config_jqmgwz.png)
+
+Aquí hay algunos ajustes que tienes que hacer.
 
 **_title_**
 
-- Validation => REQUIRED => true
+- Validación => REQUERIDO => true
 
 **_author_**
 
-- Default => your name
+- Predeterminado => tu nombre
 
 **_datetime_**
 
-- Default => USE "NOW" AS DEFAULT
+- Predeterminado => USAR "AHORA" COMO PREDETERMINADO
 
 **_description_**
 
-- Validation => REQUIRED => true
+- Validación => REQUERIDO => true
 
-## Conclusion
+## Conclusión
 
-You can now post your articles and write whatever you want.
+Ahora puedes publicar tus artículos y escribir lo que desees.
+
+

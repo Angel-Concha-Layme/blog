@@ -1,32 +1,32 @@
 ---
 author: Sat Naing
 pubDatetime: 2022-09-23T04:58:53Z
-title: How to configure AstroPaper theme
+title: Cómo configurar el tema de AstroPaper
 slug: how-to-configure-astropaper-theme
 featured: true
 draft: false
 tags:
   - configuration
   - docs
-description: How you can make AstroPaper theme absolutely yours.
+description: Cómo puedes hacer que el tema AstroPaper sea absolutamente tuyo.
 ---
 
-AstroPaper is a highly customizable Astro blog theme. With AstroPaper, you can customize everything according to your personal taste. This article will explain how you can make some customizations easily in the config file.
+AstroPaper es un tema de blog Astro altamente personalizable. Con AstroPaper, puede personalizar todo de acuerdo a su gusto personal. Este artículo explicará cómo puedes hacer algunas personalizaciones fácilmente en el archivo de configuración.
 
-## Table of contents
+## Tabla de contenidos
 
-## Configuring SITE
+## Configurando SITE
 
-The important configurations lies in `src/config.ts` file. Within that file, you'll see the `SITE` object where you can specify your website's main configurations.
+Las configuraciones importantes se encuentran en el archivo `src/config.ts`. Dentro de ese archivo, verás el objeto `SITE` donde puedes especificar las principales configuraciones de tu sitio web.
 
-During deveopment, it's okay to leave `SITE.website` empty. But in production mode, you should specify your deployed url in `SITE.website` option since this will be used for canonical URL, social card URL etc.. which are important for SEO.
+Durante el desarrollo, está bien dejar `SITE.website` vacío. Pero en el modo de producción, debe especificar su url desplegado en `SITE.website` opción ya que esto se utilizará para la URL canónica, URL tarjeta social, etc., que son importantes para SEO.
 
 ```js
 // file: src/config.ts
 export const SITE = {
   website: "https://astro-paper.pages.dev/",
   author: "Sat Naing",
-  desc: "A minimal, responsive and SEO-friendly Astro blog theme.",
+  desc: "Un tema para blog Astro minimalista, responsivo y SEO-friendly.",
   title: "AstroPaper",
   ogImage: "astropaper-og.jpg",
   lightAndDarkMode: true,
@@ -34,38 +34,47 @@ export const SITE = {
 };
 ```
 
-Here are SITE configuration options
+
 
 | Options            | Description                                                                                                                                                  |
 | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `website`          | Your deployed website url                                                                                                                                    |
-| `author`           | Your name                                                                                                                                                    |
-| `desc`             | Your site description. Useful for SEO and social media sharing.                                                                                              |
-| `title`            | Your site name                                                                                                                                               |
-| `ogImage`          | Your default OG image for the site. Useful for social media sharing. OG images can be an external image url or they can be placed under `/public` directory. |
-| `lightAndDarkMode` | Enable or disable `light & dark mode` for the website. If disabled, primary color scheme will be used. This option is enabled by default.                    |
-| `postPerPage`      | You can specify how many posts will be displayed in each posts page. (eg: if you set SITE.postPerPage to 3, each page will only show 3 posts per page)       |
+| `website`          | Tu URL del sitio web desplegado
+url                                                                                                                                    |
+| `author`           | Tu nombre                                                                                                                                                |
+| `desc`             | Descripción de tu sitio. Útil para SEO y compartir en redes sociales.                                                                                      |
+| `title`            | Nombre de tu sitio                                                                                                                                       |
+| `ogImage`          | Tu imagen OG predeterminada para el sitio. Útil para compartir en redes sociales. Las imágenes OG pueden ser una URL de imagen externa o pueden colocarse bajo el directorio /public.|
+| `lightAndDarkMode` | Habilitar o deshabilitar el `modo claro y oscuro` para el sitio web. Si se deshabilita, se usará el esquema de color primario. Esta opción está habilitada por defecto.    |
+| `postPerPage`      | Puedes especificar cuántas publicaciones se mostrarán en cada página de publicaciones. (ej: si configuras SITE.postsPerPage a 3, cada página mostrará solo 3 publicaciones por página)      |
 
-## Configuring locale
 
-You can configure the default locale used for the build (e.g., date format in the post page), and for the rendering in browsers (e.g., date format in the search page)
+
+
+
+
+## Configurar la configuración regional
+
+Puede configurar la configuración regional por defecto utilizada para la construcción (por ejemplo, el formato de fecha en la página de entrada), y para la representación en los navegadores (por ejemplo, el formato de fecha en la página de búsqueda)
 
 ```js
 // file: src/config.ts
 export const LOCALE = {
-  lang: "en", // html lang code. Set this empty and default will be "en"
-  langTag: ["en-EN"], // BCP 47 Language Tags. Set this empty [] to use the environment default
+  lang: "en", // código html lang. Establecer este vacío y por defecto será "en"
+  langTag: ["en-EN"], // BCP 47 Etiquetas de idioma. Establecer este vacío [] para utilizar el entorno por defecto
 } as const;
 ```
 
-`LOCALE.lang` will be used as HTML ISO Language code in `<html lang="en">`. If you don't specify this, default fallback will be set to `en`.
-`LOCALE.langTag` is used as [datetime locale](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString#locales). For this, you can specify an array of locales for fallback languages. Leave `LOCALE.langTag` empty `[]` to use the environment default at _build-_ and _run-time_.
+Se utilizará `LOCALE.lang` como código de idioma HTML ISO en `<html lang="en">`. Si no lo especifica, se utilizará `en` por defecto.
+`LOCALE.langTag` se utiliza como [datetime locale](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString#locales). Para ello, puede especificar una matriz de configuraciones regionales para los idiomas alternativos. Deje `LOCALE.langTag` vacío `[]` para usar el entorno por defecto en _build-_ y _run-time_.
 
-## Configuring logo or title
 
-You can specify site's title or logo image in `src/config.ts` file.
 
-![An arrow pointing at the website logo](https://res.cloudinary.com/noezectz/v1663911318/astro-paper/AstroPaper-logo-config_goff5l.png)
+## Configurar logo o título
+
+Puede especificar el título del sitio o la imagen del logo en el archivo `src/config.ts`.
+
+![Una flecha apuntando al logo del sitio web](https://res.cloudinary.com/noezectz/v1663911318/astro-paper/AstroPaper-logo-config_goff5l.png)
+
 
 ```js
 // file: src/config.ts
@@ -77,25 +86,31 @@ export const LOGO_IMAGE = {
 };
 ```
 
-If you specify `LOGO_IMAGE.enable` => `false`, AstroPaper will automatically convert `SITE.title` to the main site text logo.
+Si especifica `LOGO_IMAGE.enable` => `false`, AstroPaper convertirá automáticamente `SITE.title` en el logo de texto principal del sitio.
 
-If you specify `LOGO_IMAGE.enable` => `true`, AstroPaper will use the logo image as the site's main logo.
+Si especifica `LOGO_IMAGE.enable` => `true`, AstroPaper usará la imagen del logo como logo principal del sitio.
 
-You have to specify `logo.png` or `logo.svg` under `/public/assets` directory. Currently, only svg and png image file formats are supported. (**_Important!_** _logo name has to be logo.png or logo.svg)_
+Debe especificar `logo.png` o `logo.svg` en el directorio `/public/assets`. Actualmente, sólo se admiten los formatos de archivo de imagen svg y png. (**_¡Importante!_** _el nombre del logo debe ser logo.png o logo.svg)_)
 
-If your logo image is png file format, you have to set `LOGO_IMAGE.svg` => `false`.
+Si la imagen de su logotipo tiene formato png, debe configurar `LOGO_IMAGE.svg` => `false`.
 
-It is recommended that you specify width and height of your logo image. You can do that by setting `LOGO_IMAGE.width` _and_ `LOGO_IMAGE.height`
+Se recomienda especificar la anchura y la altura de la imagen del logotipo. Puede hacerlo estableciendo `LOGO_IMAGE.width` _y_ `LOGO_IMAGE.height`.
 
-## Configuring social links
 
-You can configure your own social links along with its icons.
 
-![An arrow pointing at social link icons](https://res.cloudinary.com/noezectz/v1663914759/astro-paper/astro-paper-socials_tkcjgq.png)
+## Configuración de enlaces sociales
 
-Currently 20 social icons are supported. (Github, LinkedIn, Facebook etc.)
+Puedes configurar tus propios enlaces sociales junto con sus iconos.
 
-You can specify and enable certain social links in hero section and footer. To do this, go to `/src/config.ts` and then you'll find `SOCIALS` array of object.
+
+![Una flecha señalando los iconos de los enlaces sociales](https://res.cloudinary.com/noezectz/v1663914759/astro-paper/astro-paper-socials_tkcjgq.png)
+
+Actualmente se soportan 20 iconos sociales. (Github, LinkedIn, Facebook etc.)
+
+
+Puede especificar y habilitar determinados enlaces sociales en la sección hero y en el pie de página. Para ello, vaya a `/src/config.ts` y entonces usted encontrará `SOCIALS` matriz de objetos.
+
+
 
 ```js
 // file: src/config.ts
@@ -122,36 +137,36 @@ export const SOCIALS: SocialObjects = [
 ]
 ```
 
-You have to set specific social link to `active: true` in order to appear your social links in hero and footer section. Then, you also have to specify your social link in `href` property.
+Usted tiene que establecer enlace social específico a `active: true` con el fin de mostrar sus enlaces sociales en el héroe y la sección de pie de página. A continuación, también tiene que especificar su enlace social en `href` propiedad.
 
-For instance, if I want to make my Github appear, I'll make it like this.
+Por ejemplo, si quiero hacer aparecer mi Github, lo haré así.
 
 ```js
 export const SOCIALS: SocialObjects = [
   {
     name: "Github",
-    href: "https://github.com/satnaing", // update account link
-    linkTitle: `${SITE.title} on Github`, // this text will appear on hover and VoiceOver
-    active: true, // makre sure to set active to true
+    href: "https://github.com/satnaing", // actualizar enlace de cuenta
+    linkTitle: `${SITE.title} on Github`, // este texto aparecerá al pasar el ratón por encima y VoiceOver
+    active: true, // asegúrese de establecer activo a true
   }
   ...
 ]
 ```
 
-Another thing to note is that you can specify the `linkTitle` in the object. This text will display when hovering on the social icon link. Besides, this will improve accessibility and SEO. AstroPaper provides default link title values; but you can replace them with your own texts.
+Otra cosa a tener en cuenta es que se puede especificar el `linkTitle` en el objeto. Este texto se mostrará al pasar el ratón sobre el enlace del icono social. Además, esto mejorará la accesibilidad y el SEO. AstroPaper proporciona valores predeterminados para el título del enlace, pero puedes sustituirlos por tus propios textos.
 
-For example,
+Por ejemplo,
 
 ```js
 linkTitle: `${SITE.title} on Twitter`,
 ```
 
-to
+a 
 
 ```js
 linkTitle: `Follow ${SITE.title} on Twitter`;
 ```
 
-## Conclusion
+## Conclusión
 
-This is the brief specification of how you can customize this theme. You can customize more if you know some coding. For customizing styles, please read [this article](https://astro-paper.pages.dev/posts/customizing-astropaper-theme-color-schemes/). Thanks for reading.✌🏻
+Esta es la breve especificación de cómo se puede personalizar este tema. Usted puede personalizar más si usted sabe algo de codificación. Para personalizar los estilos, por favor lea [este artículo](https://astro-paper.pages.dev/posts/customizing-astropaper-theme-color-schemes/). Gracias por leer.✌🏻

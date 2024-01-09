@@ -1,5 +1,5 @@
 ---
-title: How to update dependencies of AstroPaper
+title: Cómo actualizar las dependencias de AstroPaper
 author: Sat Naing
 pubDatetime: 2023-07-20T15:33:05.569Z
 slug: how-to-update-dependencies
@@ -8,107 +8,115 @@ draft: false
 ogImage: /assets/forrest-gump-quote.webp
 tags:
   - FAQ
-description: How to update project dependencies and AstroPaper template.
+description: Cómo actualizar las dependencias del proyecto y la plantilla AstroPaper.
 ---
 
-Updating the dependencies of a project can be tedious. However, neglecting to update project dependencies is not a good idea either 😬. In this post, I will share how I usually update my projects, focusing on AstroPaper as an example. Nonetheless, these steps can be applied to other js/node projects as well.
+Actualizar las dependencias de un proyecto puede ser tedioso. Sin embargo, descuidar la actualización de las dependencias de un proyecto tampoco es una buena idea 😬. En este post, compartiré cómo suelo actualizar mis proyectos, centrándome en AstroPaper como ejemplo. No obstante, estos pasos pueden aplicarse también a otros proyectos js/node.
+
 
 ![Forrest Gump Fake Quote](/assets/forrest-gump-quote.webp)
 
-## Table of contents
+## Tabla de contenidos
 
-## Updating Package Dependencies
+## Actualización de las dependencias del proyecto
 
-There are several ways to update dependencies, and I've tried various methods to find the easiest path. One way to do it is by manually updating each package using `npm install package-name@latest`. This method is the most straightforward way of updating. However, it may not be the most efficient option.
+Hay varias formas de actualizar las dependencias, y he probado varios métodos para encontrar el camino más fácil. Una forma de hacerlo es actualizar manualmente cada paquete usando `npm install package-name@latest`. Este método es la forma más sencilla de actualizar. Sin embargo, puede que no sea la opción más eficiente.
 
-My recommended way of updating dependencies is by using the [npm-check-updates package](https://www.npmjs.com/package/npm-check-updates). There's a good [article](https://www.freecodecamp.org/news/how-to-update-npm-dependencies/) from freeCodeCamp about that, so I won't be explaining the details of what it is and how to use that package. Instead, I'll show you my typical approach.
+Mi forma recomendada de actualizar las dependencias es utilizando el paquete [npm-check-updates](https://www.npmjs.com/package/npm-check-updates). Hay un buen [artículo](https://www.freecodecamp.org/news/how-to-update-npm-dependencies/) de freeCodeCamp sobre eso, así que no voy a explicar los detalles de lo que es y cómo usar ese paquete. En su lugar, te mostraré mi enfoque típico.
 
-First, install `npm-check-updates` package globally.
+
+Primero, instala el paquete `npm-check-updates` globalmente.
+
 
 ```bash
 npm install -g npm-check-updates
 ```
 
-Before making any updates, it’s a good idea to check all new dependencies that can be updated.
+Después de instalar el paquete, ejecuta el siguiente comando para actualizar todas las dependencias a la última versión.
 
 ```bash
 ncu
 ```
+La mayoría de las veces, las dependencias de los parches pueden actualizarse sin afectar en absoluto al proyecto. Por lo tanto, suelo actualizar las dependencias de los parches ejecutando `ncu -i --target patch` o `ncu -u --target patch`. La diferencia es que `ncu -u --target patch` actualizará todos los parches, mientras que `ncu -i --target patch` dará la opción de elegir qué paquete actualizar. Tú decides qué enfoque adoptar.
 
-Most of the time, patch dependencies can be updated without affecting the project at all. So, I usually update patch dependencies by running either `ncu -i --target patch` or `ncu -u --target patch`. The difference is that `ncu -u --target patch` will update all the patches, while `ncu -i --target patch` will give an option to toggle which package to update. It’s up to you to decide which approach to take.
+La siguiente parte consiste en actualizar las dependencias menores. Las actualizaciones de paquetes menores no suelen romper el proyecto, pero siempre es bueno comprobar las notas de la versión de los respectivos paquetes. Estas actualizaciones menores a menudo incluyen algunas características interesantes que se pueden aplicar a nuestros proyectos.
 
-The next part involves updating minor dependencies. Minor package updates usually won't break the project, but it is always good to check the release notes of the respective packages. These minor updates often include some cool features that can be applied to our projects.
 
 ```bash
 ncu -i --target minor
 ```
 
-Last but not least, there might be some major package updates in the dependencies. So, check the rest of the dependency updates by running
+
+Por último, pero no menos importante, es posible que haya algunas actualizaciones importantes de paquetes en las dependencias. Por lo tanto, compruebe el resto de las actualizaciones de dependencias ejecutando
 
 ```bash
 ncu -i
 ```
 
-If there are any major updates (or some updates you still have to make), the above command will output those remaining packages. If the package is a major version update, you have to be very careful since this will likely break the whole project. Therefore, please read the respective release note (or) docs very carefully and make changes accordingly.
+Si hay alguna actualización mayor (o algunas actualizaciones que aún tenga que hacer), el comando anterior mostrará los paquetes restantes. Si el paquete es una actualización de versión mayor, tiene que tener mucho cuidado ya que esto probablemente romperá todo el proyecto. Por lo tanto, por favor, lea la nota de lanzamiento respectiva (o) docs muy cuidadosamente y haga los cambios en consecuencia.
 
-If you run `ncu -i` and found no more packages to be updated, _**Congrats!!!**_ you have successfully updated all the dependencies in your project.
+Si ejecuta `ncu -i` y no encuentra más paquetes que actualizar, _**Congrats!!!**_ ha actualizado con éxito todas las dependencias de su proyecto.
 
-## Updating AstroPaper template
 
-Like other open-source projects, AstroPaper is evolving with bug fixes, feature updates, and so on. So if you’re someone who is using AstroPaper as a template, you might also want to update the template when there’s a new release.
+## Actualización de AstroPaper
 
-The thing is, you might already have updated the template according to your flavor. Therefore, I can’t exactly show **"the one-size-fits-all perfect way"** to update the template to the most recent release. However, here are some tips to update the template without breaking your repo. Keep in mind that, most of the time, updating the package dependencies might be sufficient for you.
+Al igual que otros proyectos de código abierto, AstroPaper está evolucionando con correcciones de errores, actualizaciones de características, y así sucesivamente. Así que si eres alguien que utiliza AstroPaper como plantilla, es posible que también quieras actualizar la plantilla cuando haya una nueva versión.
 
-### Files and Directories to keep in mind
+El caso es que puede que ya hayas actualizado la plantilla según tu gusto. Por lo tanto, no puedo mostrar exactamente **"la manera perfecta para todos (the one-size-fits-all perfect way) "** de actualizar la plantilla a la versión más reciente. Sin embargo, aquí hay algunos consejos para actualizar la plantilla sin romper su repo. Tenga en cuenta que, la mayoría de las veces, la actualización de las dependencias del paquete puede ser suficiente para usted.
 
-In most cases, the files and directories you might not want to override (as you've likely updated those files) are `src/content/blog/`, `src/config.ts`, `src/pages/about.md`, and other assets & styles like `public/` and `src/styles/base.css`.
 
-If you’re someone who only updates the bare minimum of the template, it should be okay to replace everything with the latest AstroPaper except the above files and directories. It’s like pure Android OS and other vendor-specific OSes like OneUI. The less you modify the base, the less you have to update.
 
-You can manually replace every file one by one, or you can use the magic of git to update everything. I won’t show you the manual replacement process since it is very straightforward. If you’re not interested in that straightfoward and inefficient method, bear with me 🐻.
 
-### Updating AstroPaper using Git
+### Archivos y directorios a tener en cuenta
 
-**IMPORTANT!!!**
+En la mayoría de los casos, los archivos y directorios que es posible que no desee anular (ya que es probable que haya actualizado esos archivos) son `src/content/blog/`, `src/config.ts`, `src/pages/about.md`, y otros activos y estilos como `public/` y `src/styles/base.css`.
 
-> Only do the following if you know how to resolve merge conflicts. Otherwise, you’d better replace files manually or update dependencies only.
+Si eres alguien que sólo actualiza lo mínimo de la plantilla, no debería haber problema en sustituir todo por la última AstroPaper excepto los archivos y directorios mencionados. Es como el sistema operativo Android puro y otros sistemas operativos específicos de proveedores como OneUI. Cuanto menos modifiques la base, menos tendrás que actualizar.
 
-First, add astro-paper as the remote in your project.
+Puedes reemplazar manualmente cada archivo uno por uno, o puedes utilizar la magia de git para actualizar todo. No te voy a mostrar el proceso de sustitución manual, ya que es muy sencillo. Si no te interesa ese método tan directo e ineficiente, ten paciencia conmigo 🐻.
+
+### Actualización de AstroPaper usando Git
+
+**¡¡IMPORTANTE!!!**
+
+> Sólo haz lo siguiente si sabes cómo resolver conflictos de fusión. Si no, mejor reemplaza los archivos manualmente o actualiza sólo las dependencias.
+
+En primer lugar, añade astro-paper como mando a distancia en tu proyecto.
 
 ```bash
 git remote add astro-paper https://github.com/satnaing/astro-paper.git
 ```
 
-Checkout to a new branch in order to update the template. If you know what you’re doing and you’re confident with your git skill, you can omit this step.
+Haz checkout a una nueva rama para actualizar la plantilla. Si sabes lo que estás haciendo y estás seguro de tu habilidad con git, puedes omitir este paso.
 
 ```bash
 git checkout -b build/update-astro-paper
 ```
 
-Then, pull the changes from astro-paper by running
+A continuación, extraiga los cambios de astro-paper ejecutando
 
 ```bash
 git pull astro-paper main
 ```
 
-If you face `fatal: refusing to merge unrelated histories` error, you can resolve that by running the following command
+Si te encuentras con el error `fatal: refusing to merge unrelated histories`, puedes resolverlo ejecutando el siguiente comando
 
 ```bash
 git pull astro-paper main --allow-unrelated-histories
 ```
 
-After running the above command, you’re likely to encounter conflicts in your project. You'll need to resolve these conflicts manually and make the necessary adjustments according to your needs.
+Tras ejecutar el comando anterior, es probable que encuentres conflictos en tu proyecto. Tendrás que resolver estos conflictos manualmente y hacer los ajustes necesarios según tus necesidades.
 
-After resolving the conflicts, test your blog thoroughly to ensure everything is working as expected. Check your articles, components, and any customizations you made.
+Después de resolver los conflictos, prueba tu blog a fondo para asegurarte de que todo funciona como se espera. Comprueba tus artículos, componentes y cualquier personalización que hayas realizado.
 
-Once you're satisfied with the result, it's time to merge the update branch into your main branch (only if you are updating the template in another branch). Congratulations! You've successfully updated your template to the latest version. Your blog is now up-to-date and ready to shine! 🎉
+Una vez que estés satisfecho con el resultado, es hora de fusionar la rama de actualización con tu rama principal (sólo si estás actualizando la plantilla en otra rama). ¡Enhorabuena! Has actualizado con éxito tu plantilla a la última versión. ¡Tu blog ya está actualizado y listo para brillar! 🎉
 
-## Conclusion
+## Conclusión
 
-In this article, I've shared some of my insights and processes for updating dependencies and the AstroPaper template. I genuinely hope this article proves valuable and assists you in managing your projects more efficiently.
+En este artículo he compartido algunas de mis ideas y procesos para actualizar las dependencias y la plantilla AstroPaper. Espero sinceramente que este artículo te resulte valioso y te ayude a gestionar tus proyectos de forma más eficiente.
 
-If you have any alternative or improved approaches for updating dependencies/AstroPaper, I would love to hear from you. Thus, don't hesitate to start a discussion in the repository, email me, or open an issue. Your input and ideas are highly appreciated!
+Si tienes algún enfoque alternativo o mejorado para actualizar las dependencias/AstroPaper, me encantaría que me lo comunicaras. No dudes en iniciar un debate en el repositorio, enviarme un correo electrónico o abrir una incidencia. Tus aportaciones e ideas son muy apreciadas.
 
-Please understand that my schedule is quite busy these days, and I may not be able to respond quickly. However, I promise to get back to you as soon as possible. 😬
+Por favor, comprenda que mi agenda está bastante ocupada estos días, y puede que no sea capaz de responder rápidamente. Sin embargo, prometo responderte lo antes posible. 😬
 
-Thank you for taking the time to read this article, and I wish you all the best with your projects!
+Gracias por tomarte el tiempo de leer este artículo, ¡y te deseo lo mejor con tus proyectos!
